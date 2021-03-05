@@ -38,6 +38,27 @@ class Logger:
         self.logger.addHandler(console)
         
         self.delete_old_file()
+    
+    def info(self, *args):
+        out = str()
+        for info in args:
+            out += str(info)
+
+        self.logger.info(out)
+    
+    def warning(self, *args):
+        out = str()
+        for info in args:
+            out += str(info)
+
+        self.logger.warning(out)
+
+    def error(self, *args):
+        out = str()
+        for info in args:
+            out += str(info)
+
+        self.logger.error(out)
 
     def get_log(self):
         return self.logger
@@ -55,7 +76,7 @@ class Logger:
             os.remove("log/" + dir_list[0])
             self.logger.warning("logging size is too big, remove " + dir_list[0] + " log file")
 
-logger = Logger().get_log()
+logger = Logger()
 
 def except_hook(cls, exception, traceback_):
     outinfo = ""
@@ -69,4 +90,6 @@ sys.excepthook = except_hook
 
 if __name__ == "__main__":
     # a = Logger().get_log()
-    logger.info("asdf")
+    logger.info("asdf", 1, "asfd", "   ", "qqweq")
+    logger.warning("asdf", 1)
+    logger.error("asdf", 1)
