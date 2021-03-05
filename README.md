@@ -62,20 +62,24 @@ python 通用库
 一些工具构造器，里面目前只实现了`单例`构造器
 
 ### 使用
-    ```python
-    @Singleton 
-    def your_function_or_class():
-        pass
-    ```
+
+```python
+from tools.Decorator import Singleton
+@Singleton 
+def your_function_or_class():
+    pass
+```
 
 ## 安装方法
 
 * 直接clone
+
 ```shell
 git clone https://github.com/zwenc/python-init.git
 ```
 
 * 修改工程的名字
+
 ```shell
 mv python-init your_name  # 修改工程名称
 cd your_name 

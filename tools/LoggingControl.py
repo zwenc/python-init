@@ -44,21 +44,21 @@ class Logger:
         for info in args:
             out += str(info)
 
-        self.logger.info(out)
+        self.logger.info("\n" + out)
     
     def warning(self, *args):
         out = str()
         for info in args:
             out += str(info)
 
-        self.logger.warning(out)
+        self.logger.warning("\n" + out)
 
     def error(self, *args):
         out = str()
         for info in args:
             out += str(info)
 
-        self.logger.error(out)
+        self.logger.error("\n" + out)
 
     def get_log(self):
         return self.logger
@@ -74,7 +74,7 @@ class Logger:
 
         if len(dir_list) >= 10:
             os.remove("log/" + dir_list[0])
-            self.logger.warning("logging size is too big, remove " + dir_list[0] + " log file")
+            self.logger.warning("\nlogging size is too big, remove " + dir_list[0] + " log file")
 
 logger = Logger()
 
