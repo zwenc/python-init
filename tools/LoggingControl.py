@@ -14,6 +14,7 @@ from tools.SystemInfo import SystemInfo
 from tools.Decorator import Singleton
 import os
 import traceback
+import multiprocessing as mp
 
 @Singleton   # 单例模式
 class Logger:
@@ -38,27 +39,40 @@ class Logger:
         self.logger.addHandler(console)
         
         self.delete_old_file()
+        self.lock = mp.Lock()
     
     def info(self, *args):
         out = str()
         for info in args:
             out += str(info)
 
-        self.logger.info("\n" + out)
+        try:
+            self.lock.acquire()
+            self.logger.info("\n" + out)
+        finally:
+            self.lock.release()
     
     def warning(self, *args):
         out = str()
         for info in args:
             out += str(info)
 
-        self.logger.warning("\n" + out)
+        try:
+            self.lock.acquire()
+            self.logger.warning("\n" + out)
+        finally:
+            self.lock.release()
 
     def error(self, *args):
         out = str()
         for info in args:
             out += str(info)
-
-        self.logger.error("\n" + out)
+            
+        try:
+            self.lock.acquire()
+            self.logger.error("\n" + out)
+        finally:
+            self.lock.release()
 
     def get_log(self):
         return self.logger
